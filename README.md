@@ -4,6 +4,8 @@ An MCP (Model Context Protocol) server that exposes [ProductSkills by Tair Asim]
 
 **The skills in this repo are not original work.** They are sourced directly from [assimovt/productskills](https://github.com/assimovt/productskills), created by [Tair Asim](https://x.com/tair). This repo exists solely to wrap those skills in an MCP server for local use.
 
+All core conceptual structures (e.g., capability modeling of product management work) originate from the upstream ProductSkills project. This repository **does not introduce a new skills framework**.
+
 ---
 
 ## What This Adds
@@ -13,6 +15,13 @@ The original ProductSkills repo delivers skills via CLI install, Claude Code plu
 - **MCP server** (`productskills-mcp.js`) — exposes all skill markdown files as MCP tools, discoverable by Claude Desktop and any MCP-compatible client
 - **Stable tool IDs** — each skill gets a hashed `ps_<12hex>` ID alongside a human-friendly alias (e.g. `prd-writing`, `scope-cutting`)
 - **Meta-tools** — `list_skills` and `list_hashes` for discoverability
+
+Instead, it operationalizes the ProductSkills model into a portable runtime layer for:
+- PM execution
+- Strategic narrative construction
+- Interview/application responses
+- Decision-support artifacts
+- LLM-assisted product reasoning
 
 ---
 

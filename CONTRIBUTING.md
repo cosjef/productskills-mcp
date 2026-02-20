@@ -1,79 +1,15 @@
-# Contributing to productskills
+# Contributing
 
-## Requesting a Skill
+## Skills
 
-Open an issue describing the skill you'd like to see. Include what framework it would encode and when someone would use it.
+The skills in this repo come from [assimovt/productskills](https://github.com/assimovt/productskills) by Tair Asim. To request a new skill, improve an existing one, or report a skill-quality issue, **open an issue or PR there**, not here.
 
-## Adding a New Skill
+## MCP Server
 
-### 1. Create the skill directory
+The `productskills-mcp.js` server in this repo is the integration layer. Issues or improvements specific to the MCP server (tool discovery, alias generation, transport behavior, etc.) belong here.
 
-```bash
-mkdir -p skills/your-skill-name
-```
+To contribute:
 
-Directory names are lowercase with hyphens. No underscores, no spaces.
-
-### 2. Create SKILL.md
-
-```yaml
----
-name: your-skill-name
-description: >
-  One paragraph (~50 words). Must contain trigger phrases for when
-  to use this skill. The description is always loaded in context;
-  the body only loads when triggered.
----
-```
-
-The `name` field must match the directory name exactly. Only `name` and `description` in the frontmatter — no version, author, or other fields.
-
-### 3. Write the body
-
-Use `skills/prd-writing/SKILL.md` as a reference. General pattern:
-
-```
-[Opening: what this does and core philosophy, 1-2 sentences]
-
-## [Core Framework]
-[The methodology. This is 60%+ of the skill.]
-
-## Guidelines
-[ALWAYS/NEVER/CRITICAL rules]
-```
-
-### 4. Optional: add references
-
-If the skill needs deeper templates or guides, add them in `references/`:
-
-```
-skills/your-skill-name/
-  SKILL.md
-  references/
-    template.md
-```
-
-No other files — no README, CHANGELOG, or docs per skill folder.
-
-## Quality Checklist
-
-- [ ] `name` matches directory name
-- [ ] Description includes trigger phrases
-- [ ] Body is 50-150 lines
-- [ ] Grounded in a real, citable framework
-- [ ] Uses ALWAYS/NEVER/CRITICAL rules, not suggestions
-- [ ] Assumes teams of 3-50, not enterprise
-- [ ] Examples over explanations
-- [ ] No "You are an expert..." role-setting
-- [ ] No corporate PM language (SAFe, velocity, story points, RACI)
-- [ ] No implementation details or code snippets
-
-## Submitting
-
-1. Fork the repo and create a branch
-2. Add your skill
-3. Open a PR
-
-## Reporting Issues
-
-If a skill gives bad output, open an issue with the skill name and what went wrong.
+1. Fork this repo and create a branch
+2. Make your change to `productskills-mcp.js`
+3. Open a PR with a clear description of what you changed and why

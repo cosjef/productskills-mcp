@@ -1,13 +1,14 @@
 {
-  "name": "productskills",
+  "name": "productskills-mcp",
   "owner": {
-    "name": "Tair Asim",
-    "url": "https://github.com/assimovt"
+    "name": "cosjef",
+    "url": "https://github.com/cosjef"
   },
   "metadata": {
-    "description": "Product skills for AI agents — discovery, strategy, prioritization, and PRD writing",
+    "description": "MCP server wrapping ProductSkills by Tair Asim — 16 product management skills for Claude Desktop",
     "version": "1.0.0",
-    "repository": "https://github.com/assimovt/productskills"
+    "repository": "https://github.com/cosjef/productskills-mcp",
+    "upstream": "https://github.com/assimovt/productskills"
   },
   "plugins": [
     {

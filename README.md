@@ -6,6 +6,19 @@ An MCP (Model Context Protocol) server that exposes [ProductSkills by Tair Asim]
 
 ---
 
+## Screenshots
+
+**Listing all available skills by category**
+![List skills](screenshots/list-skills.jpg)
+
+**Claude requesting permission to invoke a skill tool**
+![Permission prompt](screenshots/permissions.jpg)
+
+**The competitor-analysis skill generating a feature matrix in action**
+![Sample usage](screenshots/sample-usage.jpg)
+
+---
+
 ## What This Adds
 
 The original ProductSkills repo delivers skills via CLI install, Claude Code plugin, or manual copy. This integration adds:

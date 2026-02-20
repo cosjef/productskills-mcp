@@ -6,19 +6,6 @@ An MCP (Model Context Protocol) server that exposes [ProductSkills by Tair Asim]
 
 ---
 
-## Screenshots
-
-**Listing all available skills by category**
-![List skills](screenshots/list-skills.jpg)
-
-**Claude requesting permission to invoke a skill tool**
-![Permission prompt](screenshots/permissions.jpg)
-
-**The competitor-analysis skill generating a feature matrix in action**
-![Sample usage](screenshots/sample-usage.jpg)
-
----
-
 ## What This Adds
 
 The original ProductSkills repo delivers skills via CLI install, Claude Code plugin, or manual copy. This integration adds:
@@ -75,6 +62,19 @@ All 16 skills are from [assimovt/productskills](https://github.com/assimovt/prod
 | `metrics-framework` | North Star + input/output tree + counter-metrics |
 | `experiment-design` | Hypothesis-driven A/B tests |
 | `roadmap-planning` | Now/Next/Later roadmaps — outcomes, not features |
+
+---
+
+## Screenshots
+
+**Listing all available skills by category**
+![List skills](screenshots/list-skills.jpg)
+
+**Claude requesting permission to invoke a skill tool**
+![Permission prompt](screenshots/permissions.jpg)
+
+**The competitor-analysis skill generating a feature matrix in action**
+![Sample usage](screenshots/sample-usage.jpg)
 
 ---
 

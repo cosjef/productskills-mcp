@@ -16,7 +16,7 @@ The original ProductSkills repo delivers skills via CLI install, Claude Code plu
 - **Stable tool IDs** — each skill gets a hashed `ps_<12hex>` ID alongside a human-friendly alias (e.g. `prd-writing`, `scope-cutting`)
 - **Meta-tools** — `list_skills` and `list_hashes` for discoverability
 
-Instead, it operationalizes the ProductSkills model into a portable runtime layer for:
+Beyond tool access, this integration operationalizes the ProductSkills model into a portable runtime layer for:
 - PM execution
 - Strategic narrative construction
 - Interview/application responses

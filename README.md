@@ -49,6 +49,20 @@ Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_
 
 ---
 
+## Keeping Skills Updated
+
+Skills are pulled from [assimovt/productskills](https://github.com/assimovt/productskills). To sync when the upstream repo changes:
+
+```bash
+git fetch upstream
+git merge upstream/main
+git push
+```
+
+If there are conflicts (e.g. changes to shared files like `README.md`), resolve them manually before pushing.
+
+---
+
 ## Available Skills
 
 All 16 skills are from [assimovt/productskills](https://github.com/assimovt/productskills). See that repo for full documentation, CLI install, and contribution guidelines.

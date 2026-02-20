@@ -1,18 +1,32 @@
 {
-  "name": "productskills",
+  "name": "productskills-mcp",
   "version": "1.0.0",
-  "description": "Product skills for AI agents — built on how the best teams ship",
-  "repository": "https://github.com/assimovt/productskills",
-  "author": "Tair Asim",
+  "description": "MCP server wrapping ProductSkills by Tair Asim (assimovt/productskills) for Claude Desktop and MCP-compatible clients",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosjef/productskills-mcp.git"
+  },
+  "author": "cosjef",
   "license": "MIT",
   "keywords": [
-    "claude-code",
-    "skills",
+    "mcp",
+    "claude-desktop",
+    "productskills",
     "product-management",
-    "prd",
-    "cursor",
-    "codex",
-    "devin",
     "ai-agents"
-  ]
+  ],
+  "main": "productskills-mcp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/cosjef/productskills-mcp/issues"
+  },
+  "homepage": "https://github.com/cosjef/productskills-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "zod": "^3.23.8"
+  }
 }
+

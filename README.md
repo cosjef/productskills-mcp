@@ -1,110 +1,72 @@
-# Product Skills for Claude Code
+# ProductSkills MCP Integration
 
-AI agent skills for product management — discovery, strategy, prioritization, and PRD writing. Built for PMs and founders who use AI coding agents to ship faster.
+An MCP (Model Context Protocol) server that exposes [ProductSkills by Tair Asim](https://github.com/assimovt/productskills) as tools for Claude Desktop and other MCP-compatible clients.
 
-Every skill encodes a real framework (Mom Test, Shape Up, Obviously Awesome, Teresa Torres) as opinionated, actionable instructions. 50-150 lines each. No fluff.
+**The skills in this repo are not original work.** They are sourced directly from [assimovt/productskills](https://github.com/assimovt/productskills), created by [Tair Asim](https://x.com/tair). This repo exists solely to wrap those skills in an MCP server for local use.
 
-Built by [Tair Asim](https://x.com/tair). **Contributions welcome!** Found a way to improve a skill or have a new one to add? [Open a PR](CONTRIBUTING.md).
+---
 
-## Installation
+## What This Adds
 
-### Option 1: CLI Install (Recommended)
+The original ProductSkills repo delivers skills via CLI install, Claude Code plugin, or manual copy. This integration adds:
 
-```bash
-# Install all skills
-npx skills add assimovt/productskills
+- **MCP server** (`productskills-mcp.js`) — exposes all skill markdown files as MCP tools, discoverable by Claude Desktop and any MCP-compatible client
+- **Stable tool IDs** — each skill gets a hashed `ps_<12hex>` ID alongside a human-friendly alias (e.g. `prd-writing`, `scope-cutting`)
+- **Meta-tools** — `list_skills` and `list_hashes` for discoverability
 
-# Install specific skills
-npx skills add assimovt/productskills --skill prd-writing scope-cutting
+---
 
-# List available skills
-npx skills add assimovt/productskills --list
-```
-
-### Option 2: Claude Code Plugin
+## Setup
 
 ```bash
-/plugin marketplace add assimovt/productskills
-/plugin install product-skills
+git clone <this-repo>
+cd productskills
+npm install
+node productskills-mcp.js
 ```
 
-### Option 3: Clone and Copy
+Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json`):
 
-```bash
-git clone https://github.com/assimovt/productskills.git
-cp -r productskills/skills/* .claude/skills/
+```json
+{
+  "mcpServers": {
+    "productskills": {
+      "command": "node",
+      "args": ["/path/to/productskills/productskills-mcp.js"]
+    }
+  }
+}
 ```
 
-### Option 4: Git Submodule
-
-```bash
-git submodule add https://github.com/assimovt/productskills.git .claude/productskills
-```
-
-Then reference skills from `.claude/productskills/skills/`.
-
-### Use with other agents
-
-These skills are markdown files. They work with any AI coding agent:
-
-- **Cursor**: Copy skill files to `.cursor/rules/`
-- **Codex**: Add as knowledge base documents
-- **Devin**: Reference in playbooks
-- **Any LLM**: Use the markdown content as instructions
+---
 
 ## Available Skills
 
+All 16 skills are from [assimovt/productskills](https://github.com/assimovt/productskills). See that repo for full documentation, CLI install, and contribution guidelines.
+
 | Skill | Description |
 |-------|-------------|
-| [user-interview](skills/user-interview/) | Mom Test + YC's Five Questions — talk to users without leading them |
-| [problem-validation](skills/problem-validation/) | Score problems on frequency x intensity x WTP with evidence |
-| [jtbd-analysis](skills/jtbd-analysis/) | Jobs-to-be-done and Forces of Progress |
-| [research-synthesis](skills/research-synthesis/) | Turn interview notes into atomic insights and patterns |
-| [opportunity-mapping](skills/opportunity-mapping/) | Opportunity Solution Trees (Teresa Torres) |
-| [competitor-analysis](skills/competitor-analysis/) | Feature matrix, positioning map, strategic gaps |
-| [product-positioning](skills/product-positioning/) | April Dunford's Obviously Awesome framework |
-| [strategy-doc](skills/strategy-doc/) | Playing to Win + Rumelt's Strategy Kernel |
-| [feature-prioritization](skills/feature-prioritization/) | RICE scoring with enablers vs blockers lens |
-| [scope-cutting](skills/scope-cutting/) | Shape Up appetite + fixed time/variable scope + scope hammering |
-| [bet-sizing](skills/bet-sizing/) | Shape Up pitch format + Type 1/2 decision framework |
-| [prd-writing](skills/prd-writing/) | Evidence-first PRDs — concise, measurable, with clear scope boundaries |
-| [launch-plan](skills/launch-plan/) | Launch tiers (silent / soft / big-bang) with checklists |
-| [metrics-framework](skills/metrics-framework/) | North Star metric + input/output tree + counter-metrics |
-| [experiment-design](skills/experiment-design/) | Hypothesis-driven A/B tests with sample size and analysis plan |
-| [roadmap-planning](skills/roadmap-planning/) | Now/Next/Later roadmaps — outcomes, not features |
+| `user-interview` | Mom Test + YC's Five Questions |
+| `problem-validation` | Frequency x Intensity x WTP scoring |
+| `jtbd-analysis` | Jobs-to-be-done and Forces of Progress |
+| `research-synthesis` | Atomic research: nuggets to insights |
+| `opportunity-mapping` | Opportunity Solution Trees (Teresa Torres) |
+| `competitor-analysis` | Feature matrix, positioning map, strategic gaps |
+| `product-positioning` | April Dunford's Obviously Awesome |
+| `strategy-doc` | Playing to Win + Rumelt's Strategy Kernel |
+| `feature-prioritization` | RICE scoring with enablers vs blockers |
+| `scope-cutting` | Shape Up appetite + scope hammering |
+| `bet-sizing` | Shape Up pitch format + Type 1/2 decisions |
+| `prd-writing` | Evidence-first PRDs, 800-1200 words, P0/P1/P2 |
+| `launch-plan` | Launch tiers (silent / soft / big-bang) with checklists |
+| `metrics-framework` | North Star + input/output tree + counter-metrics |
+| `experiment-design` | Hypothesis-driven A/B tests |
+| `roadmap-planning` | Now/Next/Later roadmaps — outcomes, not features |
 
-## Skill Categories
+---
 
-### Discovery & Research
-- `user-interview` - Mom Test + YC Five Questions
-- `problem-validation` - Frequency x Intensity x WTP scoring
-- `jtbd-analysis` - Jobs-to-be-done, Forces of Progress
-- `research-synthesis` - Atomic research: nuggets to insights
-- `opportunity-mapping` - Teresa Torres OST
+## Credits
 
-### Strategy & Positioning
-- `competitor-analysis` - Feature matrix, positioning gaps
-- `product-positioning` - April Dunford's Obviously Awesome
-- `strategy-doc` - Playing to Win + Strategy Kernel
+Skills created by [Tair Asim](https://x.com/tair) — [assimovt/productskills](https://github.com/assimovt/productskills), MIT License.
 
-### Prioritization & Scoping
-- `feature-prioritization` - RICE + enablers vs blockers
-- `scope-cutting` - Shape Up appetite + scope hammering
-- `bet-sizing` - Shape Up pitch + Type 1/2 decisions
-
-### The PRD
-- `prd-writing` - Evidence-first, 800-1200 words, P0/P1/P2
-
-### Launch & Measure
-- `launch-plan` - Launch tiers with checklists
-- `metrics-framework` - North Star + counter-metrics
-- `experiment-design` - Hypothesis-driven A/B tests
-- `roadmap-planning` - Now/Next/Later, outcome-based
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## License
-
-MIT
+MCP server wrapper added separately for local integration use.

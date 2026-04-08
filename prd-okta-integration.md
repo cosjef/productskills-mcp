@@ -80,6 +80,14 @@ The absence of an integration has also had a partnership cost: Entrust was downg
 
 ---
 
+## Technical Considerations
+
+**Inline hook security model:** Okta's hooks (inline and event) are outbound calls from Okta to Entrust's service, not inbound. Okta has published best-practice guidance for securing these integrations, including OAuth 2.0 access-token-based authentication for inline hook calls. If Entrust implements OAuth 2.0 auth on the hook endpoint, the integration qualifies as a security-grade component in the Okta auth pipeline, not just a webhook consumer. This positioning matters in deals where the security team scrutinizes the integration. Relevant for P2 webhook work and future inline hook expansion.
+
+**Synchronous dependency risk:** If Entrust is ever used as an inline hook in the Okta auth flow, Okta waits for Entrust's response before continuing the login. Entrust becomes a synchronous dependency in the auth path. Fail-open vs. fail-closed behavior, latency budgets, and SLOs must be defined before any inline hook work ships. This is a deferred decision for this cycle (inline hooks are out of scope for V1), but engineering should plan for it in the architecture.
+
+---
+
 ## Success Metrics
 
 | Metric | Target | Counter-metric |

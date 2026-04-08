@@ -1,92 +1,86 @@
-# PRD: Okta Integration for Workforce IDV
+# PRD: Okta IDV Integration
 
-**Status:** Draft | **Owner:** Jeff Costa | **Date:** 2026-04-04 | **Updated:** 2026-04-06
+**Owner:** Jeff Costa | **Date:** 2026-04-08 | **Status:** Draft
 
----
+## Problem Statement
 
-## Problem
+Okta is the dominant IAM platform in the Fortune 500 — the exact segment KYE targets. Of the 4 key KYE moments — Hiring, Onboarding, Privileged Access, Account Recovery — three require Okta to trigger or complete the workflow:
 
-Entrust has no native Okta integration. Incode ships Okta + Cisco Duo integrations today and is winning on it. Veriff's Okta integration is a cited factor in the State Farm deal currently in progress as a loss. Okta is the dominant IAM platform in the Fortune 500 — the exact segment KYE targets.
-
-Of the 4 key KYE moments — Hiring, Onboarding, Privileged Access, Account Recovery — three require Okta to trigger or complete the workflow:
 - **Onboarding:** Okta account provisioning is gated on ID verification
 - **Account Recovery:** Okta is the MFA reset surface
 - **Privileged Access:** Okta Privileged Access (OPA) is the PIM layer at most large enterprises
 
-Without an Okta integration, every KYE deal requires custom engineering, extending sales cycles and creating SE dependency. KYE is the FY27 bridging strategy for $1.25M in bookings. Okta is a prerequisite to getting there.
+Without an Okta integration, every KYE deal requires custom engineering work, which extends sales cycles and creates dependencies on SE engineers. KYE is also the FY27 bridging strategy for $1.25M in NA bookings. Okta as a pre-configured, first-party, supported IDV vendor is a prerequisite to get there.
 
-The absence of an integration has also had a partnership cost: Entrust was downgraded in Okta's "Okta Elevate" partner program due to lack of integrations. Competitors — Persona, Clear, Incode — already have these integrations. Technical support access (ticketing, engineer-to-engineer) is still intact, but the partner standing downgrade limits Okta-sourced pipeline. Shipping this integration recovers that standing.
+The absence of an integration has also had a partnership cost: Entrust was downgraded in Okta's "Okta Elevate" partner program due to lack of integrations. Competitors (Persona, CLEAR Verified, Incode) already have these integrations. The partner standing downgrade limits Okta-sourced pipeline, and shipping this integration recovers that standing.
 
-**Evidence:**
-- State Farm: deal loss in progress; Veriff's Okta integration is a cited factor
-- Nashville Electric: active deal using new Okta framework — confirmed real demand
-- Active pipeline — Optum/UHG, Dell, PwC, Comcast — all likely Okta shops *(confirm with Yelena Tarbuck before kickoff)*
-- Sales team reports stalled opportunities due to missing Okta integration (per Mark Lewin call, 2026-04-06)
-- Alliances team (John Parish): reseller network (Optive, WWT, Guidepoint, Accutive, Trace3) believes a working Okta integration unlocks significant channel opportunity — these firms have existing multi-million dollar Entrust hardware/HSM/PKI relationships
-- Incode: Okta + Cisco Duo live; Experian partnered with Incode in 2025 — competitive channel now has distribution
+**Integration mechanism context:** Okta supports a first-class IDV vendor type called `ID_PROOFING`. It is a special IdP type within Okta's policy engine — not a webhook or generic OIDC integration. When an Okta admin selects an IDV vendor, they configure it like any other policy step in the Okta Admin Console: no custom endpoints, no redirect wiring, no glue code on the customer side. Persona, CLEAR Verified, and Incode have achieved this status. Entrust has not. The gap is not just "no Okta integration" — it is "not in the vendor framework that makes IDV deployable by an Okta admin."
 
----
+**Competitive Evidence:**
+
+- State Farm: deal loss to Veriff in progress (not a native Okta integration)
+- Active pipeline — Optum/UHG, Dell, PwC, Comcast — all likely Okta shops (confirm with AEs and Gnan before kickoff)
+- Okta + Cisco Duo is a widely adopted and competitive integration, particularly in enterprise workforce identity scenarios
+- Experian formally partnered with Incode (2025), giving Incode enterprise distribution to 1,800 customers via Experian Ascend and CrossCare products
 
 ## Goals
 
-1. Close 3+ deals from active KYE pipeline where Okta integration was a stated requirement or objection — within 6 months of GA
-2. Reduce time-to-demo for KYE prospects from days (custom SE setup) to under 30 minutes
-3. Publish OIN marketplace listing within 90 days of GA to enable inbound pipeline from Okta ecosystem
-4. Recover Okta Elevate partner tier and activate alliances channel (Optive, WWT, Guidepoint, etc.) for KYE distribution
-
----
+- Close 3+ deals from active KYE pipeline where Okta integration was a stated requirement or objection — within 6 months of GA
+- Reduce time-to-demo for KYE prospects from days (custom SE setup) to under 60 minutes
+- Publish OIN marketplace listing within 90 days of GA to enable inbound pipeline from Okta ecosystem
+- Recover Okta Elevate partner tier and activate alliances channel (Optive, WWT, Guidepoint) for KYE distribution
 
 ## Target Users
 
-**Primary:** Enterprise IT/Security teams (CISO, IAM leads) at Fortune 500 companies running Okta who need to add IDV to employee onboarding, MFA/account recovery, or privileged access workflows.
+**Primary — Okta IAM Admin / IT Security lead** at a Fortune 500 company who has been asked to add IDV to an existing Okta workflow (onboarding, account recovery, or privileged access) and needs to configure it without a custom engineering project or PS engagement.
 
-**Secondary:** Entrust AEs and SEs — they need a repeatable, self-serviceable demo that doesn't require custom Okta configuration.
+**Secondary — HR / IT Ops lead** at the same company who owns the new hire onboarding process, experiences the pain of manual identity checks, and is the internal sponsor pushing for a solution. Does not configure the integration but approves and requests it.
 
----
+**Tertiary — Entrust AE / SE** who needs to demo the Okta + Entrust story in under 30 minutes without engineering on the call.
 
-## Stakeholders
-
-| Name | Role | Involvement |
-|------|------|-------------|
-| Gnan Gowda | Jeff's manager | Engineering resource confirmation; roadmap authority |
-| Summer Gaasedelen | Customer Onboarding / PS | Requirements input before Andrew engagement |
-| Andrew MacCuaig | Engineering Manager, Studio | Build scoping — only after Summer's input |
-| Mark Lewin | BizDev & Partnerships | Okta partner relationship; warm intro to Nicole Lam |
-| John Parish | Alliances | Reseller channel activation post-GA |
-| Nicole Lam | Okta — Partnership Program | External partner contact; intro pending eng resource confirmation |
-| Yelena Tarbuck | AE, New Customers | Pipeline validation; customer demand examples |
-| Reed Schroeder | AE | State Farm deal; Okta customer discovery |
-
----
+This separates the buyer who feels the pain (HR/IT ops), the buyer who implements the fix (IAM admin), and the internal sales user (AE/SE) — three distinct jobs, three distinct success criteria.
 
 ## Requirements
 
 **P0 — Does not ship without:**
-- P0: An Okta admin can trigger an Entrust IDV flow (doc + biometric) from within an Okta workflow or policy without custom code on the customer side.
-- P0: Verification result (pass/fail + confidence score) is returned to Okta and can gate provisioning, access grants, or recovery flows.
-- P0: Integration covers at least 2 of 4 KYE moments: New Hire Onboarding and Account Recovery / MFA Reset.
-- P0: End-user IDV flow is completable on mobile (iOS + Android) — most employees complete onboarding on phone.
+
+**P0.1** An Okta admin can add Entrust as an `ID_PROOFING` provider in the Okta Admin Console and trigger an Entrust IDV flow (doc scan + biometric) from an Okta authentication policy — without writing custom code, hosting custom endpoints, or involving Entrust PS.
+
+**P0.2** Verification result is returned to Okta as a signed JWT (`id_token`) containing `verified_claims` with `assurance_level: VERIFIED or FAILED` and `trust_framework: IDV-DELEGATED`. Okta uses this claim to gate the policy outcome. A confidence score or intermediate state is not sufficient — Okta's policy engine resolves on VERIFIED or FAILED only.
+
+**P0.3** Integration covers at least 2 of 4 KYE moments: New Hire Onboarding and Account Recovery / MFA Reset.
+
+**P0.4** End-user IDV flow is completable on mobile (iOS + Android) — many employees complete onboarding on phone.
+
+**P0.5** Studio prebuilt template for Okta onboarding flow — removes SE setup time per deal and is required for the AE/SE demo motion to be repeatable without engineering on the call.
 
 **P1 — Ships without, but materially degrades the KYE story:**
-- P1: Entrust listed in Okta Integration Network (OIN) marketplace — enables self-serve discovery.
-- P1: Integration supports Privileged Access (PIM role elevation) trigger, required for Gov Cloud IAL-2 use case.
-- P1: Studio prebuilt template for Okta onboarding flow — removes SE setup time per deal.
-- P1: Integration supports Hiring / Applicant Pre-Screening moment (pre-Okta provisioning).
 
-**P2:**
-- P2: Okta-consistent UI for the IDV experience
-- P2: Webhook-based real-time verification status back to Okta
-- P2: Support for Okta Verify (passkey) as a downstream step post-IDV
+**P1.1** Entrust listed in Okta Integration Network (OIN) marketplace — enables customer self-serve discovery.
 
----
+**P1.2** Integration supports Privileged Access (PIM role elevation) trigger, required for Gov Cloud IAL-2 use case.
+
+**P1.3** Entrust's inline hook endpoint authenticates incoming Okta calls via OAuth 2.0 access tokens, per Okta's published inline hook security guidance. This allows the integration to present as a higher-assurance security component in the Okta auth path, not just another webhook consumer — a meaningful positioning advantage for KYE deals where security posture is a buying criterion.
+
+**P2 — Nice to haves:**
+
+**P2.1** Okta-consistent UI for the IDV experience
+
+**P2.2** Webhook-based real-time verification status back to Okta
+
+**P2.3** Support for Okta Verify (passkey) as a downstream step post-IDV
 
 ## Technical Considerations
 
-**Inline hook security model:** Okta's hooks (inline and event) are outbound calls from Okta to Entrust's service, not inbound. Okta has published best-practice guidance for securing these integrations, including OAuth 2.0 access-token-based authentication for inline hook calls. If Entrust implements OAuth 2.0 auth on the hook endpoint, the integration qualifies as a security-grade component in the Okta auth pipeline, not just a webhook consumer. This positioning matters in deals where the security team scrutinizes the integration. Relevant for P2 webhook work and future inline hook expansion.
+**Integration architecture: why Okta chose OIDC**
 
-**Synchronous dependency risk:** If Entrust is ever used as an inline hook in the Okta auth flow, Okta waits for Entrust's response before continuing the login. Entrust becomes a synchronous dependency in the auth path. Fail-open vs. fail-closed behavior, latency budgets, and SLOs must be defined before any inline hook work ships. This is a deferred decision for this cycle (inline hooks are out of scope for V1), but engineering should plan for it in the architecture.
+IDV is a user-facing flow. A webhook can notify a backend — it cannot redirect a browser, run a verification ceremony, or return control to Okta. OIDC's authorization code flow is built for exactly this: send the user to a vendor, run a ceremony, come back with a result. That result is a signed JWT (ID token) — cryptographically verifiable by Okta, with a standardized claims structure. Webhooks return JSON over HTTP with no built-in trust model. OIDC is a portable trust container; webhooks are a notification layer with no user interaction, no redirect flow, and no clean policy integration.
 
----
+PAR (Pushed Authorization Requests) adds enterprise hardening: authorization parameters travel server-to-server first; the browser only carries a short-lived reference. The downstream effect: Okta's policy engine treats Entrust like any other authenticator — MFA, WebAuthn, risk-based step-up. "Require IDV if risk is high" becomes a policy rule, not a custom integration.
+
+We are not building an API integration. We are building a standards-compliant identity system component. This distinction matters in security reviews and in how AEs position KYE against competitors.
+
+**Inline hook security model:** Okta's inline and event hooks are outbound calls from Okta to Entrust's service, not inbound. Okta has published best-practice guidance for securing these integrations, including OAuth 2.0 access-token-based authentication on inline hook requests. If Entrust implements that auth model, the integration presents as a higher-assurance security component in the Okta auth path. This positioning matters in deals where the security team scrutinizes the integration and is the basis for P1.4.
 
 ## Success Metrics
 
@@ -98,28 +92,51 @@ The absence of an integration has also had a partnership cost: Entrust was downg
 | Pipeline unblocked | 50%+ of active KYE deals no longer cite Okta as a gap | — |
 | Channel pipeline sourced via Okta Elevate / resellers | TBD with John Parish | Within 6 months of GA |
 
----
-
 ## Out of Scope
 
-- **Cisco Duo** — Incode has it; important but not this cycle.
-- **Workday** — separate no-webhook architecture problem; separate PRD.
-- **CIAM / customer-facing Okta use cases** — different buyer, different motion; this PRD covers KYE/workforce only.
-- **Custom per-customer Okta workflow engineering** — eliminating this pattern is the point.
-- **Ping Identity feature parity** — separate initiative.
-
----
+- **CIAM / customer-facing Okta use cases** — different buyer, different motion; this PRD covers KYE/workforce only
+- **Custom per-customer Okta workflow engineering** — eliminating this pattern is the point
+- **Inline hooks / token enrichment model** — Entrust acting as a risk/enrichment signal injected into Okta token claims via inline hook. Different positioning (decision provider vs. step provider), different buyer motion. Deferred.
 
 ## Open Questions
 
-1. **Integration path** (Jeff → Summer → Andrew, do not go to Andrew first): Three options — BYO IDV via OIDC, new Studio task, or native OIN listing. OIDC path is missing /oauth2/auth, /oauth2/token, /oauth2/jwks. OIN may require Okta certification — potential timeline blocker. **Path decision gates all scoping.** Target: [date?]
+**1. Customer pain validation:** No documented evidence validating the problem statement, customer interest, or customers' preferred implementation methods.
 
-2. **Nimble evaluation** (Wednesday call, ~2026-04-08): Nimble claims to have already built the Okta integration. Gnan recommends caution; prefers internal resources via Wipro. Evaluate Wednesday: what did they build, does it meet P0 requirements, does it reduce internal build scope? Do not make external commitments until this is assessed.
+**2. Integration path:** The native OIN listing path and the OIDC path are the same path. To register as an Okta `ID_PROOFING` vendor, Entrust must implement OIDC Authorization Code flow with PAR. The three required endpoints are: `POST /oauth2/par` (back-channel session creation), `GET /oauth2/idv-authorize` (browser-facing IDV UX entry), and `POST /oauth2/token` (code-for-JWT exchange). Entrust also needs a JWKS endpoint for token verification. The Studio task option is a separate, non-native workaround — it may unblock early deals but does not achieve OIN listing or admin-configurable policy integration. These are different outcomes. Decision needed: ship Studio task as interim, or go straight to OIDC/OIN?
 
-3. **Engineering resource confirmation** (Jeff → Gnan, due 2026-04-07): Engineering is not yet confirmed on roadmap. **Gates all external commitments** — partner intro to Nicole Lam, Nimble evaluation framing, and AE pipeline promises all depend on this.
+**3. Fail-open vs. fail-closed:** Once Entrust is in the Okta auth path via `ID_PROOFING`, it becomes a synchronous, blocking dependency. If Entrust is slow or unavailable, Okta waits. Decision needed before GA: does the flow fail the verification (fail-closed) or skip it (fail-open) if Entrust times out? This affects SLO commitments, latency budgets, and customer trust. Engineering must define this before the integration is production-certified.
 
-4. **MGM prototype** (Andrew): Jeff Hickman built an Okta integration for MGM in 2023/2024. Docs lost in OneDrive migration. Recovery or reconstruction could reduce build scope significantly.
+**4. MGM prototype (Andrew):** Jeff Hickman built an Okta integration for MGM in 2023/2024. Docs lost in OneDrive migration. Recovery or reconstruction could reduce build scope significantly and help directionally.
 
-5. **OIN certification SLA** (Jeff + Nicole Lam via Mark): Is this a 2-week or 6-month process? Determines whether OIN listing is P1 this cycle or gets pushed. Ask on intro call with Nicole.
+**5. OIN certification timeline (Jeff + Nicole Lam):** Is this a 2-week or 6-month process? Determines whether OIN listing is P1 this cycle or gets pushed.
 
-6. **Pipeline validation** (Yelena Tarbuck, meeting in 2 days): Confirm which active accounts specifically require Okta integration vs. just being Okta shops. Pull from Salesforce / recent call notes before kickoff.
+**6. Engineering resource confirmation (Gnan):** Engineering does not have Okta work on committed roadmap. Gates all external commitments.
+
+**7. Pipeline validation (AEs):** Confirm which active accounts specifically require Okta integration vs. just being Okta shops. Pull from Salesforce / recent call notes before kickoff.
+
+**8. Architecture customer validation:** OIDC or Studio task? API or native integration?
+
+**9. Nimble:** Nimble claims to have already built the Okta integration. Gnan recommends caution; prefers internal resources via Wipro. Evaluate: what did they build, does it meet P0 requirements, does it reduce internal build scope?
+
+**10. MVI:** Define the minimum viable integration. Do not try to integrate everything. Select one critical use case ("step-up auth during account recovery") and scope it to the absolute minimum required for a successful, demonstrable flow within Okta's framework.
+
+**11. Okta Marketplace:** Customers use the Okta/Auth0 marketplace primarily for discovery but request direct access to executable code during implementation. Clarify whether achieving a low-friction marketplace listing requires materially more investment to meet new "uniform integration standards," and whether that effort aligns with actual customer adoption behavior.
+
+## Notable Not Doing
+
+**SSF as a future expansion path:** Okta's Shared Signals Framework (SSF) supports continuous risk signal ingestion from third-party security providers (CrowdStrike, Omnissa). This is a separate integration model from `ID_PROOFING` — asynchronous, background, and security-posture-based rather than point-in-time verification. Worth flagging to Mark Lewin as a potential Phase 2 partnership angle. Not in scope for this cycle.
+
+## Appendix
+
+### Stakeholders
+
+| Name | Role | Involvement |
+|------|------|-------------|
+| Gnan Gowda | Jeff's manager | Engineering resource confirmation; roadmap authority |
+| Summer Gaasedelen | Customer Onboarding / PS | Requirements input before Andrew engagement |
+| Andrew MacCuaig | Engineering Manager, Studio | Build scoping — only after Summer's input |
+| Mark Lewin | BizDev & Partnerships | Okta partner relationship; warm intro to Nicole Lam |
+| John Parish | Alliances | Reseller channel activation post-GA |
+| Nicole Lam | Okta — Partnership Program | External partner contact; intro pending eng resource confirmation |
+| Yelena Tarbuck | AE, New Customers | Pipeline validation; customer demand examples |
+| Reed Schroeder | AE | State Farm deal; Okta customer discovery |

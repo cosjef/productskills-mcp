@@ -14,7 +14,7 @@ Without an Okta integration, every KYE deal requires custom engineering work, wh
 
 The absence of an integration has also had a partnership cost: Entrust was downgraded in Okta's "Okta Elevate" partner program due to lack of integrations. Competitors (Persona, CLEAR Verified, Incode) already have these integrations. The partner standing downgrade limits Okta-sourced pipeline, and shipping this integration recovers that standing.
 
-**Integration mechanism context:** Okta supports a first-class IDV vendor type called `ID_PROOFING`. It is a special IdP type within Okta's policy engine — not a webhook or generic OIDC integration. When an Okta admin selects an IDV vendor, they configure it like any other policy step in the Okta Admin Console: no custom endpoints, no redirect wiring, no glue code on the customer side. Persona, CLEAR Verified, and Incode have achieved this status. Entrust has not. The gap is not just "no Okta integration" — it is "not in the vendor framework that makes IDV deployable by an Okta admin."
+**Integration mechanism context:** Okta supports a first-class IDV vendor type called `ID_PROOFING` — a native policy step in the Okta Admin Console, not a webhook or custom integration. Persona, CLEAR Verified, and Incode have achieved this status. Entrust has not. The gap is not just "no Okta integration" — it is "not in the vendor framework that makes IDV deployable by an Okta admin."
 
 **Competitive Evidence:**
 
@@ -56,7 +56,7 @@ This separates the buyer who feels the pain (HR/IT ops), the buyer who implement
 
 **P1 — Ships without, but materially degrades the KYE story:**
 
-**P1.1** Entrust listed in Okta Integration Network (OIN) marketplace — enables customer self-serve discovery.
+**P1.1** Entrust listed in Okta Integration Network (OIN) marketplace — enables customer self-serve discovery. *Current assessment: likely Phase 2. OIN certification timeline unknown (see Open Question 5); certification process may be 2 weeks or 6 months. The core OIDC integration is a prerequisite regardless — OIN listing is the packaging step on top of a working integration, not a separate build.*
 
 **P1.2** Integration supports Privileged Access (PIM role elevation) trigger, required for Gov Cloud IAL-2 use case.
 
@@ -69,6 +69,16 @@ This separates the buyer who feels the pain (HR/IT ops), the buyer who implement
 **P2.2** Webhook-based real-time verification status back to Okta
 
 **P2.3** Support for Okta Verify (passkey) as a downstream step post-IDV
+
+## Integration Architecture & Data Flow
+
+*Sourced from the [Okta IDV Integration Guide](https://developer.okta.com/docs/guides/idv-integration/main/). Full endpoint specs, JWT claim definitions, Admin Console configuration steps, and error codes: [references/okta-integration-spec.md](references/okta-integration-spec.md).*
+
+Entrust must implement four endpoints: `POST /oauth2/par` (receives Okta's server-side authorization request and returns a `request_uri`), `GET /oauth2/authorize` (receives the `request_uri` and launches the IDV ceremony), `POST /oauth2/token` (exchanges the authorization code for a signed ID token using PKCE/S256), and a JWKS endpoint so Okta can verify the token signature. The flow is always PAR-first: Okta sends parameters server-to-server, gets back a short-lived `request_uri`, then redirects the user's browser carrying only that reference. The user completes doc scan and biometric, Entrust redirects to Okta's fixed callback URI, and Okta completes the code-for-token exchange.
+
+The ID token Entrust returns must contain a `verified_claims` object with two required fields: `trust_framework: "IDV-DELEGATED"` and `assurance_level: "VERIFIED" | "FAILED"`. Okta's policy engine resolves on `assurance_level` only — VERIFIED allows the step, FAILED denies it. Entrust does not send the full verification payload to Okta; the audit record stays in Entrust's system. One implementation edge case: `given_name` and `family_name` are required claims by default in the PAR request — if a user's Okta profile is missing these fields, the PAR request fails before the ceremony starts.
+
+---
 
 ## Technical Considerations
 

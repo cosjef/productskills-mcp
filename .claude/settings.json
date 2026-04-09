@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "/Users/cosjef/.claude"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/cosjef/.claude/scripts/scan-entrust.sh",
+            "timeout": 180,
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -63,7 +63,7 @@ All claims support a `fuzzy` extension for match flexibility. Optional claims ar
 The Okta admin performs these steps — no customer-side code or custom endpoint wiring required:
 
 1. Enable the Okta account management policy on their tenant.
-2. Register Entrust as an `ID_PROOFING` IdP using `client_id` and `client_secret` (generated from Entrust's portal).
+2. Register Entrust as an IDV vendor IdP using `client_id` and `client_secret` (generated from Entrust's portal). *[Note: the exact vendor type identifier used in Okta's API is unconfirmed — verify with Nicole Lam during Okta partner onboarding.]*
 3. Map Okta user profile attributes to the OIDC claims Entrust will receive, designating each as required or optional.
 4. Set the redirect URI to `https://{yourOktadomain}/idp/identity-verification/callback`.
 5. Add Entrust as a policy step in the relevant authentication policy rules.
